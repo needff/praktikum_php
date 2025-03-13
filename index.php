@@ -1,39 +1,37 @@
 <?php
-include "koneksi.php";
+// Koneksi ke database
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$db = 'php_db';
 
-$query = "SELECT * FROM mahasiswa";
-$result = mysqli_query($koneksi, $query);
+$conn = new mysqli($host, $user, $pass, $db);
+
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>Data Mahasiswa</title>
+    <title>Dashboard Praktikum PHP</title>
 </head>
 <body>
-    <h1>Daftar Mahasiswa</h1>
-    <a href="tambah.php">Tambah Mahasiswa</a><br><br>
-    <table border="1">
-        <tr>
-            <th>ID</th>
-            <th>Nama</th>
-            <th>NIM</th>
-            <th>Jurusan</th>
-            <th>Aksi</th>
-        </tr>
+    <h1>Dashboard Praktikum PHP</h1>
 
-        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-            <tr>
-                <td><?= $row['id']; ?></td>
-                <td><?= $row['nama']; ?></td>
-                <td><?= $row['nim']; ?></td>
-                <td><?= $row['jurusan']; ?></td>
-                <td>
-                    <a href="edit.php?id=<?= $row['id']; ?>">Edit</a> | 
-                    <a href="hapus.php?id=<?= $row['id']; ?>" onclick="return confirm('Yakin ingin menghapus?');">Hapus</a>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
+    <h3>Menu Praktikum:</h3>
+    <ul>
+        <li><a href="selamatdatang.html">Halaman Selamat Datang</a></li>
+        <li><a href="var.php">Variabel PHP</a></li>
+        <li><a href="aritmatika.php">Operator Aritmatika</a></li>
+        <li><a href="perbandingan.php">Operator Perbandingan</a></li>
+        <li><a href="ifelse.php">Kondisi If-Else</a></li>
+        <li><a href="looping.php">Perulangan (Looping)</a></li>
+        <li><a href="function.php">Fungsi di PHP</a></li>
+        <li><a href="array.php">Array di PHP</a></li>
+        <li><a href="form.html">Formulir Input Data</a></li>
+    </ul>
+    
 </body>
 </html>

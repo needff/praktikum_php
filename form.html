@@ -2,27 +2,70 @@
 <html lang="id">
 
 <head>
-    <title>Formulir Input Data</title>
+    <title>Formulir Input Mahasiswa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        a {
+            text-decoration: none;
+            color: #3498db;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select {
+            padding: 8px;
+            margin-top: 5px;
+            width: 300px;
+            display: block;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #27ae60;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Formulir Data Mahasiswa</h1>
+    <h1>Formulir Input Mahasiswa</h1>
+    <a href="index.php">Kembali ke Dashboard</a>
+    <h3></h3>
+    <a href="form.php">Lihat Data Mahasiswa</a>
 
-    <form action="proses.php" method="POST">
-        <label for="nama">Nama:</label>
-        <input type="text" id="nama" name="nama" required><br><br>
-
-        <label for="nim">NIM:</label>
-        <input type="text" id="nim" name="nim" required><br><br>
-
-        <label for="jurusan">Jurusan:</label>
-        <select id="jurusan" name="jurusan" required>
-            <option value="Informatika">Informatika</option>
-            <option value="Sistem Informasi">Sistem Informasi</option>
-            <option value="Teknik Komputer">Teknik Komputer</option>
-        </select><br><br>
-
-        <button type="submit">Kirim</button>
+    <form action="form.php" method="POST">
+        <label>Nama: <input type="text" name="nama" required></label>
+        <label>NIM: <input type="text" name="nim" required></label>
+        <label>Jurusan:
+            <select name="jurusan">
+                <option value="" disabled selected>Pilih Jurusan</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Teknologi Informasi">Teknologi Informasi</option>
+                <option value="Ilmu Komputer">Ilmu Komputer</option>
+            </select>
+        </label>
+        <button type="submit" name="submit">Simpan</button>
     </form>
 </body>
 

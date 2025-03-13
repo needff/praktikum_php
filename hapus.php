@@ -1,15 +1,21 @@
 <?php
-include "koneksi.php";
+// Koneksi ke database
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$db = 'php_db';
 
-$id = $_GET['id'];
-$query = "DELETE FROM mahasiswa WHERE id=$id";
+$conn = new mysqli($host, $user, $pass, $db);
 
-if (mysqli_query($koneksi, $query)) {
-    echo "Data berhasil dihapus! <br>";
-    echo "<a href='index.php'>Kembali ke daftar</a>";
-} else {
-    echo "Error: " . mysqli_error($koneksi);
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
 
-mysqli_close($koneksi);
+// Hapus data berdasarkan ID
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $conn->query("DELETE FROM mahasiswa WHERE id=$id");
+}
+
+header('Location: index.php');
 ?>

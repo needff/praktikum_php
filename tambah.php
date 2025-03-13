@@ -1,47 +1,50 @@
 <?php
-include 'koneksi.php';
+// Koneksi ke database
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$db = 'php_db';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nama = htmlspecialchars($_POST['nama']);
-    $nim = htmlspecialchars($_POST['nim']);
-    $jurusan = htmlspecialchars($_POST['jurusan']);
+$conn = new mysqli($host, $user, $pass, $db);
 
-    $query = "INSERT INTO mahasiswa (nama, nim, jurusan) VALUES ('$nama', '$nim', '$jurusan')";
-    mysqli_query($koneksi, $query);
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
+}
 
-    header("Location: index.php");
-    exit();
+// Tambah data ke database
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $nama = $_POST['nama'];
+    $nim = $_POST['nim'];
+    $jurusan = $_POST['jurusan'];
+    $conn->query("INSERT INTO mahasiswa (nama, nim, jurusan) VALUES ('$nama', '$nim', '$jurusan')");
+    header('Location: index.php');
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
-
 <head>
-    <title>Tambah Data Mahasiswa</title>
+    <title>Tambah Mahasiswa</title>
 </head>
-
 <body>
     <h1>Tambah Data Mahasiswa</h1>
-    <form action="" method="POST">
-        <label>Nama:</label><br>
-        <input type="text" name="nama" required><br><br>
+    <form method="POST" action="">
+        <label>Nama: <input type="text" name="nama" required></label><br>
+        <label>NIM: <input type="text" name="nim" required></label><br>
 
-        <label>NIM:</label><br>
-        <input type="text" name="nim" required><br><br>
+        <!-- Dropdown untuk memilih jurusan -->
+        <label>Jurusan:
+            <select name="jurusan" required>
+                <option value="" disabled selected>Pilih Jurusan</option>
+                <option value="Sistem Informasi">Sistem Informasi</option>
+                <option value="Teknologi Informasi">Teknologi Informasi</option>
+                <option value="Informatika">Informatika</option>
+                <option value="Teknik Komputer">Teknik Komputer</option>
+            </select>
+        </label><br>
 
-        <label>Jurusan:</label><br>
-        <select name="jurusan" required>
-            <option value="">-- Pilih Jurusan --</option>
-            <option value="Informatika">Informatika</option>
-            <option value="Sistem Informasi">Sistem Informasi</option>
-            <option value="Teknik Komputer">Teknik Komputer</option>
-            <option value="Teknologi Informasi">Teknologi Informasi</option>
-        </select><br><br>
-
-        <button type="submit">Simpan</button>
-        <a href="index.php">Batal</a>
+        <button type="submit">Tambah</button>
     </form>
+    <a href="index.php">Kembali ke Dashboard</a>
 </body>
-
 </html>
