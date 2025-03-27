@@ -30,7 +30,11 @@ if ($conn->connect_error) {
         <li><a href="looping.php">Perulangan (Looping)</a></li>
         <li><a href="function.php">Fungsi di PHP</a></li>
         <li><a href="array.php">Array di PHP</a></li>
-        <li><a href="form.html">Formulir Input Data</a></li>
+        <li><a href="form.html">CRUD</a></li>
+        <li><a href="grafik_dasar.html">Grafik Dasar</a></li>
+        <li><a href="kustomisasi_grafik.html">Kustomisasi Grafik</a></li>
+        <li><a href="grafik_dinamis.php">Grafik dinamis dengan mengambil data dari database</a></li>
+
     </ul>
     
 </body>

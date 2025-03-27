@@ -31,12 +31,13 @@ if (isset($_GET['hapus'])) {
     exit();
 }
 
-// Edit Data
+// Udate Data
 if (isset($_POST['update'])) {
     $id      = $_POST['id'];
     $nama    = $_POST['nama'];
     $nim     = $_POST['nim'];
     $jurusan = $_POST['jurusan'];
+    
 
     $query = "UPDATE mahasiswa SET nama='$nama', nim='$nim', jurusan='$jurusan' WHERE id=$id";
     $conn->query($query);
@@ -66,8 +67,8 @@ if (isset($_POST['update'])) {
         <tr>
             <th>ID</th>
             <th>Nama</th>
-            <th>NIM</th>
-            <th>Jurusan</th>
+            <th>NPM</th>
+            <th>Jurusan</th>            
             <th>Aksi</th>
         </tr>
 
@@ -80,6 +81,7 @@ if (isset($_POST['update'])) {
                 <td><?= $row['nama']; ?></td>
                 <td><?= $row['nim']; ?></td>
                 <td><?= $row['jurusan']; ?></td>
+              
                 <td>
                     <!-- Tombol Edit -->
                     <a href="form.php?edit=<?= $row['id']; ?>">Edit</a> |
@@ -89,9 +91,8 @@ if (isset($_POST['update'])) {
             </tr>
         <?php endwhile; ?>
     </table>
-
-    <!-- Form Edit Data -->
-    <?php if (isset($_GET['edit'])):
+<!-- Form Edit Data -->
+<?php if (isset($_GET['edit'])):
         $id = $_GET['edit'];
         $editData = $conn->query("SELECT * FROM mahasiswa WHERE id=$id")->fetch_assoc();
     ?>
@@ -103,21 +104,22 @@ if (isset($_POST['update'])) {
             <label>Nama:</label><br>
             <input type="text" name="nama" value="<?= $editData['nama']; ?>" required><br><br>
 
-            <label>NIM:</label><br>
+            <label>NPM:</label><br>
             <input type="text" name="nim" value="<?= $editData['nim']; ?>" required><br><br>
 
-            <label>Jurusan:</label><br>
             <select name="jurusan" required>
                 <option value="Sistem Informasi" <?= ($editData['jurusan'] == 'Sistem Informasi') ? 'selected' : ''; ?>>Sistem Informasi</option>
                 <option value="Teknologi Informasi" <?= ($editData['jurusan'] == 'Teknologi Informasi') ? 'selected' : ''; ?>>Teknologi Informasi</option>
                 <option value="Informatika" <?= ($editData['jurusan'] == 'Informatika') ? 'selected' : ''; ?>>Informatika</option>
             </select><br><br>
 
+           
+
             <button type="submit" name="update">Update Data</button>
             <a href="form.php">Batal</a>
         </form>
     <?php endif; ?>
-
+   
 </body>
 
 </html>
